@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#E7D2AD">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Аризона и фургон: исходники, результаты трёх нейросетей и финальная обработка в Photoshop. Сравнение фотографий и пошаговые демонстрации.">
+  <title>Аризона и фургон | Александр Кузнецов</title>
+  <link rel="stylesheet" href="site.css?v=20261008-plugins-inline">
+  <script src="icons.js" defer></script>
+  <script src="data.js?v=20261008-plugins-inline" defer></script>
+  <script src="site.js?v=20261008-plugins-inline" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к фотографиям и инструкции</a>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="brand-icon" data-icon="mountain"></span><span>Аризона и фургон</span></a>
+    <div class="top-actions">
+      <button class="text-button contents-toggle" type="button" aria-controls="contents" aria-expanded="false" aria-label="Оглавление"><span data-icon="menu"></span><span>Оглавление</span></button>
+      <button id="recording-toggle" class="icon-button" type="button" aria-pressed="false" aria-label="Включить режим записи экрана" title="Режим записи экрана"><span data-icon="camera"></span></button>
+    </div>
+  </header>
+  <aside id="contents" class="contents" hidden aria-label="Оглавление">
+    <div class="contents-head"><h2>Оглавление</h2><button class="icon-button contents-close" type="button" aria-label="Закрыть оглавление"><span data-icon="x"></span></button></div>
+    <nav id="contents-links"></nav>
+  </aside>
+  <div class="contents-backdrop" hidden></div>
+  <main id="main">
+    <section id="top" class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="author-line">Фотоистория Александра Кузнецова</p>
+        <h1 id="page-title" aria-label="Аризона и фургон">Аризона<br>и фургон</h1>
+        <p class="hero-description">Исходники, три нейросети и финальная обработка в Photoshop.</p>
+        <p class="hero-intro">От фотографии с обычной съёмки до кадра среди песка и скал. Здесь можно сравнить каждый этап и посмотреть, как собирался результат.</p>
+        <div class="hero-links"><a class="primary-link" href="#photographs" aria-label="Сравнить фотографии"><span data-icon="layers"></span>Сравнить фотографии</a><a class="secondary-link" href="#workflow">Посмотреть обработку</a></div>
+      </div>
+      <figure class="hero-figure"><div id="hero-image" class="hero-image"></div><figcaption><span>Финальный кадр</span><span>Нейросеть + Photoshop</span></figcaption></figure>
+    </section>
+    <section id="photographs" class="collection" aria-labelledby="photos-heading">
+      <div class="section-intro"><span class="section-icon" data-icon="camera"></span><div><h2 id="photos-heading">Одна съёмка.<br>Разные решения.</h2><p>Слева исходник, справа финал. Под каждым сравнением находятся первые результаты трёх нейросетей. Выберите любую пару и откройте фотографии крупно.</p></div></div>
+      <div id="frames"><p class="loading-message">Загрузка фотографий…</p></div>
+    </section>
+    <section id="workflow" class="workflow" aria-labelledby="workflow-heading">
+      <div class="section-intro"><span class="section-icon" data-icon="compass"></span><div><h2 id="workflow-heading">Как появился<br>этот свет и песок</h2><p>Последовательность обработки по записям экрана: что менять, зачем это нужно и на что смотреть при проверке. Анимации можно остановить и повторить.</p></div></div>
+      <div id="chapters"></div>
+    </section>
+  </main>
+  <footer class="footer"><span class="footer-mark" data-icon="mountain"></span><p>Александр Кузнецов</p><div><a href="https://www.youtube.com/@Alkruze" target="_blank" rel="noopener noreferrer">YouTube @Alkruze</a><a href="https://t.me/alkruze_photo" target="_blank" rel="noopener noreferrer">Telegram @alkruze_photo</a></div><p class="footer-note">Фотографии, сравнения и разбор обработки к ролику "Аризона и фургон".</p></footer>
+  <button id="recording-exit" class="recording-exit" type="button" hidden><span data-icon="eye"></span>Вернуть интерфейс</button>
+  <dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-head"><div><h2 id="viewer-title">Сравнение фотографий</h2><p id="viewer-description">← →: первые генерации. Колесо: масштаб. Перемещение: мышью или Shift + стрелки.</p></div><button id="viewer-close" class="icon-button" type="button" aria-label="Закрыть просмотр"><span data-icon="x"></span></button></div>
+    <div class="viewer-options"><label>Слева<select id="viewer-left" aria-label="Фотография слева"></select></label><button id="viewer-swap" class="icon-button" type="button" aria-label="Поменять фотографии местами" title="Поменять местами"><span data-icon="arrow-left"></span><span data-icon="arrow-right"></span></button><label>Справа<select id="viewer-right" aria-label="Фотография справа"></select></label><div class="zoom-tools"><button id="zoom-out" class="icon-button" type="button" aria-label="Уменьшить"><span data-icon="zoom-out"></span></button><output id="zoom-level" aria-live="polite" title="Размер фотографии слева. 100%: один пиксель изображения на один пиксель экрана">100%</output><button id="zoom-in" class="icon-button" type="button" aria-label="Увеличить"><span data-icon="zoom-in"></span></button><button id="zoom-fit" class="small-button" type="button">Вписать</button><button id="zoom-actual" class="small-button" type="button" title="Показать фотографию слева в размере 1:1">100%</button></div></div>
+    <div class="viewer-generations" aria-label="Быстрое сравнение первых генераций"><button id="generation-prev" class="text-button" type="button" aria-label="Предыдущая первая генерация"><span data-icon="arrow-left"></span><span>Предыдущая</span></button><div id="generation-models" class="generation-models" role="group" aria-label="Первая генерация справа"></div><button id="generation-next" class="text-button" type="button" aria-label="Следующая первая генерация"><span>Следующая</span><span data-icon="arrow-right"></span></button></div>
+    <div id="viewer-viewport" class="viewer-viewport" tabindex="0" aria-label="Фотографии: стрелки влево и вправо переключают первые генерации, Shift со стрелками перемещает фотографию">
+      <div class="viewer-layer"><div class="viewer-transform"><img id="viewer-image-left" alt="" draggable="false"></div></div>
+      <div class="viewer-layer viewer-after"><div class="viewer-transform"><img id="viewer-image-right" alt="" draggable="false"></div></div>
+      <div class="viewer-divider" aria-hidden="true"><span>‹ ›</span></div>
+      <div id="viewer-loading" class="viewer-loading" role="status">Загрузка полных изображений…</div>
+    </div>
+    <div class="viewer-bottom"><span id="viewer-label-left"></span><label class="viewer-range-label">Граница сравнения<input id="viewer-range" type="range" min="0" max="100" value="50" aria-label="Граница сравнения слева направо"></label><span id="viewer-label-right"></span></div>
+  </dialog>
+  <noscript><p class="noscript">Для сравнения фотографий и просмотра инструкции включите JavaScript в браузере.</p></noscript>
+</body>
+</html>
